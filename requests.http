@@ -1,0 +1,189 @@
+# REST-client
+# примеры API-запросов
+
+# Текущий пользователь
+GET {{authUrl}}/users/me/
+Authorization: Token {{superuser_token}}
+
+###
+
+# Список пользователей
+GET {{authUrl}}/users/
+Authorization: Token {{superuser_token}}
+
+###
+
+# Регистрация нового пользователя
+POST {{authUrl}}/users/
+Content-Type: application/json
+
+{
+  "email": "{{email1}}",
+  "password": "{{password1}}",
+  "last_name": "Киевский",
+  "first_name": "Сергей"
+}
+
+###
+
+# Активация пользователя
+POST {{authUrl}}/users/activation/
+Content-Type: application/json
+
+{
+  "uid": "Mg",
+  "token": "bwlvvk-e318a9f8eb569656ce03cf9603c11871"
+}
+
+###
+
+# Получить токен аутентификации супер-пользователя
+POST {{authUrl}}/token/login/
+Content-Type: application/json
+
+{
+  "email": "{{superuser_email}}",
+  "password": "{{superuser_password}}"
+}
+
+###
+
+# Получить токен аутентификации пользователя
+POST {{authUrl}}/token/login/
+Content-Type: application/json
+
+{
+  "email": "{{email1}}",
+  "password": "{{password1}}"
+}
+
+###
+
+# Удаление токена аутентификации пользователя
+POST {{authUrl}}/token/logout/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+###
+
+# Удаление пользователя
+DELETE {{authUrl}}/users/34/
+Content-Type: application/json
+Authorization: Token {{superuser_token}}
+
+{
+  "current_password": "{{superuser_password}}"
+}
+
+###
+
+# Редактирование пользователя
+PATCH {{authUrl}}/users/2/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "patronymic": "Николаевич"
+}
+
+###
+
+# Контакты пользователя
+GET {{authUrl}}/contacts/
+Authorization: Token {{superuser_token}}
+
+###
+
+# Добавить контакт
+POST {{authUrl}}/contacts/
+Content-Type: application/json
+Authorization: Token {{superuser_token}}
+
+{
+  "city": "{{city1}}",
+  "phone": "{{phone1}}",
+  "to_user": "1"
+}
+
+#################################################
+
+# ВСЕ Магазины
+GET {{apiUrl}}/stores/any/
+Authorization: Token {{token1}}
+
+###
+
+# Любой магазин по его id
+GET {{apiUrl}}/stores/any/2/
+Authorization: Token {{token1}}
+
+###
+
+# Партнерские магазины пользователя
+GET {{apiUrl}}/stores/partner/
+Authorization: Token {{token1}}
+
+###
+
+# Партнерские магазины по id пользователя
+GET {{apiUrl}}/stores/partner/34/
+Authorization: Token {{token1}}
+
+###
+
+# Свои магазины пользователя
+GET {{apiUrl}}/stores/me/
+Authorization: Token {{token1}}
+
+###
+
+# Свой магазин пользователя по id магазина
+GET {{apiUrl}}/stores/me/2/
+Authorization: Token {{token1}}
+
+###
+
+# Добавить свой магазин в партнеры
+POST {{apiUrl}}/stores/me/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "name": "{{store3}}",
+  "url": "{{store_url3}}"
+}
+
+###
+
+# Удалить по id свой магазин из партнеров
+DELETE {{apiUrl}}/stores/me/23/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "current_password": "{{password1}}"
+}
+
+###
+
+# Изменить по id возможность приема заказов в своем магазине (True/False)
+PATCH {{apiUrl}}/stores/me/2/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "accepts_orders": "False"
+}
+
+###
+
+# Обновить по id магазина его партнерский прайс
+PATCH {{apiUrl}}/stores/me/28/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "source": "{{store_price1}}"
+}
+
+###
